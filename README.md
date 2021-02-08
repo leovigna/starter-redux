@@ -1,6 +1,6 @@
-# Typescript Starter Project
+# Redux Starter Project
 
-Typescript starter project.
+Redux starter project.
 
 ## Getting Started
 
@@ -17,10 +17,10 @@ pnpmp install
 To clone this starter repo and add it as an upstream folow below:
 
 ```
-git clone https://github.com/leovigna/typescript-starter.git myproject
+git clone https://github.com/leovigna/redux-starter.git myproject
 cd myproject
 git remote set-url origin https://github.com/leovigna/myproject.git
-git remote add upstream https://github.com/leovigna/typescript-starter.git
+git remote add upstream https://github.com/leovigna/redux-starter.git
 git push origin master
 git push --all
 ```
