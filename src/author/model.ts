@@ -5,7 +5,7 @@ export interface Fields {
     nationality?: string;
 }
 
-export class Model extends ORMModel {
+class Model extends ORMModel {
     static options = {
         idAttribute: 'id',
     };
@@ -17,3 +17,5 @@ export class Model extends ORMModel {
         nationality: attr(),
     };
 }
+
+export { Model };

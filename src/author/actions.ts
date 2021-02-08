@@ -1,7 +1,7 @@
 import { actionCreator } from '../utils';
-import { Model, Fields } from './model';
+import { Fields } from './model';
 
-const name = Model.modelName as string;
+const name = 'Author';
 
 export const CREATE = `${name}/CREATE`;
 export const UPDATE = `${name}/UPDATE`;

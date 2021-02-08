@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { put } from 'redux-saga/effects';
-import { create, fetch as fetchAction } from './actions';
-import { fetch as fetchSaga } from './sagas';
+import { create, fetch as fetchAction } from './author/actions';
+import { fetch as fetchSaga } from './author/sagas';
 
 describe('sagas', () => {
     it('fetch', () => {

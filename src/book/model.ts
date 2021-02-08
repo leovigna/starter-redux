@@ -1,13 +1,13 @@
 import { attr, fk, Model as ORMModel } from 'redux-orm';
-import { Fields as AuthorFields } from '../author';
+import { Fields as AuthorFields } from '../author/model';
 
 export interface Fields {
     name: string;
     authorId: number;
-    author: AuthorFields;
+    author?: AuthorFields;
 }
 
-export class Model extends ORMModel {
+class Model extends ORMModel {
     static options = {
         idAttribute: 'id',
     };
@@ -20,3 +20,5 @@ export class Model extends ORMModel {
         authorId: fk({ to: 'Author', as: 'author', relatedName: 'books' }),
     };
 }
+
+export { Model };

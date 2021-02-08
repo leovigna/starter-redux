@@ -1,20 +1,15 @@
 import { actionCreator } from '../utils';
-import { Model, Fields } from './model';
+import { Fields } from './model';
 
-const name = Model.modelName as string;
+const name = 'Book';
 
 export const CREATE = `${name}/CREATE`;
 export const UPDATE = `${name}/UPDATE`;
 export const REMOVE = `${name}/DELETE`;
 export const FETCH = `${name}/FETCH`;
 
-export interface CreateUpdateActionInput {
-    name: Fields['name'];
-    authorId: Fields['authorId'];
-}
-
-export const create = actionCreator<typeof CREATE, CreateUpdateActionInput>(CREATE);
-export const update = actionCreator<typeof UPDATE, CreateUpdateActionInput>(UPDATE);
+export const create = actionCreator<typeof CREATE, Fields>(CREATE);
+export const update = actionCreator<typeof UPDATE, Fields>(UPDATE);
 export const remove = actionCreator<typeof REMOVE, number>(REMOVE);
 export const fetch = actionCreator<typeof FETCH, number>(FETCH);
 

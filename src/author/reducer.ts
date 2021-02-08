@@ -1,10 +1,7 @@
-import { Model } from './model';
 import { Action, CREATE, UPDATE, REMOVE, FETCH, CreateAction, UpdateAction, RemoveAction } from './actions';
 
-const name = Model.modelName;
-
 export function reducer(sess: any, action: Action) {
-    const Model = sess[name];
+    const Model = sess.Author;
     switch (action.type) {
         case CREATE:
             Model.create({ ...(action as CreateAction).payload });
