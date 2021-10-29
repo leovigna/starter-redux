@@ -7,14 +7,15 @@ import setAction from '../actions/set';
 import { selectByIdSingle } from '../selectors';
 
 import exists from './exists';
-import fetchSaga from './fetch';
+import fetch from './fetch';
+import Interface, { getId, InterfacePartial } from '../model/interface';
 
 describe('sagas', () => {
-    const item = { firstName: 'John', lastName: 'Doe', age: 42 };
-    const id = 'John-Doe';
-    const itemWithId = { id: id, ...item };
+    const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
+    const id = getId(item);
+    const itemWithId: Interface = { id, ...item };
 
-    describe('exists()', () => {
+    describe('exists', () => {
         it(`error: ${name} undefined`, () => {
             expect(testSaga(exists, id).next().select(selectByIdSingle, id).next).to.throw(`${name} ${id} undefined`);
         });
@@ -27,7 +28,7 @@ describe('sagas', () => {
 
     describe('fetch', () => {
         it('fetch', () => {
-            testSaga(fetchSaga, fetchAction(id))
+            testSaga(fetch, fetchAction(id))
                 .next()
                 .call(exists, id)
                 .next(itemWithId)

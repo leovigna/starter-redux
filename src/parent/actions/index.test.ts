@@ -2,42 +2,42 @@ import { assert } from 'chai';
 import { CREATE, UPDATE, REMOVE, SET, create, update, remove, set } from './index';
 
 import { name } from '../common';
-import Interface from '../model/interface';
+import Interface, { InterfacePartial, Id, getId } from '../model/interface';
 
 describe(`${name}.actions`, () => {
-    const john = { firstName: 'John', lastName: 'Doe', age: 42 };
-    const johnId = 'John-Doe';
+    const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
+    const id: Id = getId(item);
 
     it('create', () => {
         const expected = {
             type: CREATE,
-            payload: { id: johnId, ...john },
+            payload: { id, ...item },
         };
-        assert.deepEqual(create(john), expected);
+        assert.deepEqual(create(item), expected);
     });
 
     it('update', () => {
         const expected = {
             type: UPDATE,
-            payload: { id: johnId, ...john },
+            payload: { id, ...item },
         };
-        assert.deepEqual(update(john), expected);
+        assert.deepEqual(update(item), expected);
     });
 
     it('remove', () => {
         const expected = {
             type: REMOVE,
-            payload: johnId,
+            payload: id,
         };
-        assert.deepEqual(remove(johnId), expected);
-        assert.deepEqual(remove(john), expected);
+        assert.deepEqual(remove(id), expected);
+        assert.deepEqual(remove(item), expected);
     });
 
     it('set', () => {
         const expected = {
             type: SET('firstName'),
-            payload: { id: johnId, key: 'firstName' as keyof Interface, value: john.firstName },
+            payload: { id, key: 'firstName' as keyof Interface, value: item.firstName },
         };
-        assert.deepEqual(set({ id: johnId, key: 'firstName', value: john.firstName }), expected);
+        assert.deepEqual(set({ id, key: 'firstName', value: item.firstName }), expected);
     });
 });
