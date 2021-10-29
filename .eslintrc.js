@@ -9,7 +9,7 @@ module.exports = {
         'plugin:import/recommended',
         'plugin:import/typescript',
     ],
-    plugins: ['@typescript-eslint', 'prettier', 'import'],
+    plugins: ['@typescript-eslint', 'prettier', 'import', '@jambit/typed-redux-saga'],
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
         sourceType: 'module', // Allows for the use of imports
@@ -32,6 +32,8 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
+        '@jambit/typed-redux-saga/use-typed-effects': ['error', 'macro'],
+        '@jambit/typed-redux-saga/delegate-effects': 'error',
     },
     settings: {
         'import/resolver': {

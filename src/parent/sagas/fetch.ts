@@ -1,13 +1,15 @@
-import { put, takeEvery } from 'redux-saga/effects';
-import { create, FETCH, FetchAction } from '../actions';
+import { call, put, takeEvery } from 'typed-redux-saga/macro';
+import { set, FETCH, FetchAction } from '../actions';
+import exists from './exists';
 
 export default function* fetch(action: FetchAction) {
-    //Fetch here
-    if (action.payload == 'jane') {
-        yield put(create({ firstName: 'Jane', lastName: 'Doe' }));
-    }
+    const { payload } = action;
+    yield* call(exists, payload);
+
+    //Fetch mock
+    yield* put(set({ id: payload, key: 'age', value: 69 }));
 }
 
 export function* saga() {
-    yield takeEvery(FETCH, fetch);
+    yield* takeEvery(FETCH, fetch);
 }

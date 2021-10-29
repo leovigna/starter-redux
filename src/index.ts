@@ -1,6 +1,6 @@
-function main() {
-}
+import * as Parent from './parent';
 
-if (typeof require !== 'undefined' && require.main === module) {
-    main();
-}
+export { rootReducer } from './reducer';
+export { rootSaga } from './saga';
+export { createStore } from './store';
+export { Parent };

@@ -8,6 +8,9 @@
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "declaration": true,
-        "skipLibCheck": true
+        "emitDeclarationOnly": true,
+        "skipLibCheck": true,
+        "downlevelIteration": true,
+        "isolatedModules": true
     }
 }

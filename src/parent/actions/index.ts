@@ -19,25 +19,22 @@ export function isAction(action: { type: string }): action is Action {
     return isReducerAction(action);
 }
 
+export type { CreateAction, RemoveAction, UpdateAction, SetAction, FetchAction };
+
 export {
     CREATE,
     create,
-    CreateAction,
     isCreateAction,
     REMOVE,
     remove,
-    RemoveAction,
     isRemoveAction,
     UPDATE,
     update,
-    UpdateAction,
     isUpdateAction,
     SET,
     set,
-    SetAction,
     isSetAction,
     FETCH,
     fetch,
-    FetchAction,
     isFetchAction,
 };
