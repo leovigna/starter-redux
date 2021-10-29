@@ -9,3 +9,5 @@ export const update = createAction(UPDATE, (payload: InterfacePartial) => {
 
 export type UpdateAction = ReturnType<typeof update>;
 export const isUpdateAction = update.match;
+
+export default update;

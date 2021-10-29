@@ -9,3 +9,5 @@ export const fetch = createAction(FETCH, (payload: IdArgs) => {
 
 export type FetchAction = ReturnType<typeof fetch>;
 export const isFetchAction = fetch.match;
+
+export default fetch;

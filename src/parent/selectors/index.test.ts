@@ -1,11 +1,11 @@
 import { assert } from 'chai';
-import { createStore } from '../../store';
+import { createStore, StoreType } from '../../store';
 import { name } from '../common';
 import { create, set } from '../actions';
 import { selectByIdExists, selectByIdSingle, selectByIdMany, selectByFilter } from '../selectors';
 
 describe(`${name}.selectors`, () => {
-    let store: ReturnType<typeof createStore>;
+    let store: StoreType;
     let state: any;
     const john = { firstName: 'John', lastName: 'Doe', age: 42 };
     const johnId = 'John-Doe';

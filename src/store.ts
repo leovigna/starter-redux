@@ -15,4 +15,7 @@ export const createStore = () => {
     return store;
 };
 
+export type StoreType = ReturnType<typeof createStore>;
+export type DispatchType = StoreType['dispatch'];
+
 export default createStore();

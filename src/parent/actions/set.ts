@@ -17,3 +17,5 @@ export const set = (payload: SetActionInput) => {
 export type SetAction = ReturnType<typeof set>;
 export const isSetAction = (action: { type: string; payload?: { key?: keyof Interface } }) =>
     !!action.payload?.key && action.type === SET(action.payload.key);
+
+export default set;

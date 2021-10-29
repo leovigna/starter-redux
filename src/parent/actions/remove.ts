@@ -9,3 +9,5 @@ export const remove = createAction(REMOVE, (payload: IdArgs) => {
 
 export type RemoveAction = ReturnType<typeof remove>;
 export const isRemoveAction = remove.match;
+
+export default remove;

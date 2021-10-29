@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import { name } from '../common';
-import { createStore } from '../../store';
+import { createStore, StoreType } from '../../store';
 import { create } from '../actions';
 import { useByIdSingle, useByIdMany } from '../hooks';
 
@@ -12,7 +12,7 @@ const jsdom = require('mocha-jsdom');
 describe(`${name}.hooks`, () => {
     jsdom({ url: 'http://localhost' });
 
-    let store: ReturnType<typeof createStore>;
+    let store: StoreType;
     const john = { firstName: 'John', lastName: 'Doe', age: 42 };
     const johnId = 'John-Doe';
     const johnWithId = { id: johnId, ...john };

@@ -9,3 +9,5 @@ export const create = createAction(CREATE, (payload: InterfacePartial) => {
 
 export type CreateAction = ReturnType<typeof create>;
 export const isCreateAction = create.match;
+
+export default create;
