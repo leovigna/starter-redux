@@ -3,7 +3,6 @@ import { renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import { name } from '../common';
 import { createStore } from '../../store';
-import sleep from '../../utils/sleep';
 import { create } from '../actions';
 import { useByIdSingle, useByIdMany } from '../hooks';
 
@@ -31,8 +30,8 @@ describe(`${name}.hooks`, () => {
             wrapper,
         });
 
-        await sleep(1000);
         assert.deepEqual(result.current, johnWithId);
+        assert.equal(result.all.length, 1);
     });
 
     it('useByIdMany', async () => {
@@ -40,7 +39,7 @@ describe(`${name}.hooks`, () => {
             wrapper,
         });
 
-        await sleep(1000);
         assert.deepEqual(result.current, [johnWithId]);
+        assert.equal(result.all.length, 1);
     });
 });
