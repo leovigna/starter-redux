@@ -10,7 +10,7 @@ import exists from './exists';
 import fetch from './fetch';
 import Interface, { getId, InterfacePartial } from '../model/interface';
 
-describe('sagas', () => {
+describe(`${name}.sagas`, () => {
     const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id = getId(item);
     const itemWithId: Interface = { id, ...item };

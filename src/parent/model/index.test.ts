@@ -10,7 +10,7 @@ import Interface, {
     IdDeconstructed,
 } from '../model/interface';
 
-describe(`${name}.actions`, () => {
+describe(`${name}.model`, () => {
     const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id: Id = `${item.firstName}-${item.lastName}`;
     const itemWithId: Interface = { id, ...item };

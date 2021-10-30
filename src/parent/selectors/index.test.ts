@@ -29,12 +29,10 @@ describe(`${name}.selectors`, () => {
     describe('selectByIdSingle', () => {
         it('(id)', () => {
             const selected = selectByIdSingle(state, id);
-            assert.isDefined(selected);
             assert.deepEqual(selected, itemWithId);
         });
         it('(idDeconstructed', () => {
             const selected = selectByIdSingle(state, idDeconstructed);
-            assert.isDefined(selected);
             assert.deepEqual(selected, itemWithId);
         });
         it('memoization', () => {
@@ -67,12 +65,12 @@ describe(`${name}.selectors`, () => {
             assert.deepEqual(selectByFilter(state, undefined), [itemWithId]);
         });
         it('({firstName})', () => {
-            assert.deepEqual(selectByFilter(state, { firstName: 'John' }), [itemWithId]);
-            assert.deepEqual(selectByFilter(state, { firstName: 'Jane' }), []);
+            assert.deepEqual(selectByFilter(state, { firstName: item.firstName }), [itemWithId]);
+            assert.deepEqual(selectByFilter(state, { firstName: 'xzy' }), []);
         });
         it('memoization', () => {
-            const select1 = selectByFilter(state, { firstName: 'John' });
-            const select2 = selectByFilter(state, { firstName: 'John' });
+            const select1 = selectByFilter(state, { firstName: item.firstName });
+            const select2 = selectByFilter(state, { firstName: item.firstName });
             assert.deepEqual(select1, select2);
             assert.equal(select1, select2);
         });
