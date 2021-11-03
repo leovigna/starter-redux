@@ -1,4 +1,5 @@
-import Interface from './interface';
+import { Interface, Id, IdArgs, getId, getIdDeconstructed, validate } from './interface';
 import Model from './orm';
 
-export type { Interface, Model };
+export type { Interface, Id, IdArgs, Model };
+export { getId, getIdDeconstructed, validate };
