@@ -8,10 +8,10 @@ import { selectByIdSingle } from '../selectors';
 
 import exists from './exists';
 import fetch from './fetch';
-import Interface, { getId, InterfacePartial } from '../model/interface';
+import { getId, Interface } from '../model/interface';
 
 describe(`${name}.sagas`, () => {
-    const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
+    const item: Interface = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id = getId(item);
     const itemWithId: Interface = { id, ...item };
 

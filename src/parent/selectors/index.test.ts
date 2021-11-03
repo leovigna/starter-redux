@@ -2,13 +2,13 @@ import { assert } from 'chai';
 import { REDUX_ROOT } from '../../common';
 import { orm } from '../../orm';
 
-import { getId, getIdDeconstructed, InterfacePartial } from '../model/interface';
+import { getId, getIdDeconstructed, Interface } from '../model/interface';
 import { name } from '../common';
 
 import { selectByIdExists, selectByIdSingle, selectByIdMany, selectByFilter } from '../selectors';
 
 describe(`${name}.selectors`, () => {
-    const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
+    const item: Interface = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id = getId(item);
     const itemWithId = { id: id, ...item };
     const idDeconstructed = getIdDeconstructed(item);

@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 
 import { name } from '../common';
-import Interface, { InterfacePartial, getId } from '../model/interface';
+import { Interface, getId } from '../model/interface';
 
 import { create, CREATE, CreateAction, isCreateAction } from './create';
 import { update, UPDATE, UpdateAction, isUpdateAction } from './update';
@@ -9,7 +9,7 @@ import { remove, REMOVE, RemoveAction, isRemoveAction } from './remove';
 import { set, SET, SetAction, isSetAction } from './set';
 
 describe(`${name}.actions`, () => {
-    const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
+    const item: Interface = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id = getId(item);
 
     it('create', () => {

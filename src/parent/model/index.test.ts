@@ -1,17 +1,10 @@
 import { assert } from 'chai';
 
 import { name } from '../common';
-import Interface, {
-    InterfacePartial,
-    Id,
-    getId,
-    getIdDeconstructed,
-    validate,
-    IdDeconstructed,
-} from '../model/interface';
+import { Interface, Id, getId, getIdDeconstructed, validate, IdDeconstructed } from '../model/interface';
 
 describe(`${name}.model`, () => {
-    const item: InterfacePartial = { firstName: 'John', lastName: 'Doe', age: 42 };
+    const item: Interface = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id: Id = `${item.firstName}-${item.lastName}`;
     const itemWithId: Interface = { id, ...item };
     const idDeconstructed: IdDeconstructed = { firstName: item.firstName, lastName: item.lastName };
@@ -24,6 +17,5 @@ describe(`${name}.model`, () => {
     });
     it('validate', () => {
         assert.deepEqual(validate(item), itemWithId);
-        assert.deepEqual(validate({ id, age: 42 }), itemWithId);
     });
 });
