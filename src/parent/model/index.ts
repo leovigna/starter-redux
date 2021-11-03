@@ -1,9 +1,8 @@
-import { Interface, Id, IdArgs, getId, getIdDeconstructed, validate } from './interface';
-import Model from './orm';
+import { Interface, IdDeconstructed, getId, getIdDeconstructed, validate } from './interface';
 
-export type { Interface, Id, IdArgs, Model };
+export type { Interface, IdDeconstructed };
 //alias
-export type { Interface as Parent };
+export type { Interface as Parent, IdDeconstructed as ParentId };
 
 export { getId, getIdDeconstructed, validate };
 export { getId as getParentId, validate as validateParent };
