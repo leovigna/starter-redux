@@ -2,10 +2,15 @@ import { ORM } from 'redux-orm';
 import ParentModel from './parent/model/orm';
 import { REDUX_ROOT } from './common';
 
-const orm = new ORM({
-    stateSelector: (state: any) => state[REDUX_ROOT],
-});
-orm.register(ParentModel);
+//Fix undefined import issue
+let orm = getOrm();
+export function getOrm(): any {
+    if (orm) return orm;
+    orm = new ORM({
+        stateSelector: (state: any) => state[REDUX_ROOT],
+    });
+    orm.register(ParentModel);
+}
 
 export const initializeState = (orm: any) => {
     const state = orm.getEmptyState();
@@ -18,5 +23,3 @@ export const initializeState = (orm: any) => {
 
     return state;
 };
-
-export { orm };
