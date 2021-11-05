@@ -1,6 +1,8 @@
 import { assert } from 'chai';
 import { createStore, StoreType } from '../store';
-import { getId, validate, create, selectByIdSingle } from './index';
+import { getId, validate } from './model';
+import { create } from './actions';
+import { selectByIdSingle } from './selectors';
 import { name } from './common';
 
 describe(`${name}.integration`, () => {

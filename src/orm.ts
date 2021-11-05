@@ -10,6 +10,8 @@ export function getOrm(): any {
         stateSelector: (state: any) => state[REDUX_ROOT],
     });
     orm.register(ParentModel);
+
+    return orm;
 }
 
 export const initializeState = (orm: any) => {
