@@ -2,7 +2,6 @@ import { createSelector } from 'redux-orm';
 import { name } from '../common';
 import { getOrm } from '../../orm';
 import Interface from '../model/interface';
-import memoizeArrayByRef from '../../utils/memo/memoizeArrayByRef';
 
 type selectByFilterType = (state: any, filter: Partial<Interface> | undefined) => Interface[];
 const selectByFilter: selectByFilterType = createSelector(
@@ -14,7 +13,7 @@ const selectByFilter: selectByFilterType = createSelector(
         if (!!filter) query = query.filter(filter);
 
         const result = query.toRefArray();
-        return memoizeArrayByRef(result);
+        return result;
     },
 );
 

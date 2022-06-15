@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-commonjs
 module.exports = {
     env: {
         node: true,
@@ -9,11 +10,13 @@ module.exports = {
         'plugin:import/recommended',
         'plugin:import/typescript',
     ],
-    plugins: ['@typescript-eslint', 'prettier', 'import', '@jambit/typed-redux-saga'],
+    plugins: ['@typescript-eslint', 'prettier', 'import', 'react-hooks' /*'@jambit/typed-redux-saga'*/],
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
         sourceType: 'module', // Allows for the use of imports
-        ecmaFeatures: {},
+        ecmaFeatures: {
+            jsx: true, // Allows for the parsing of JSX
+        },
     },
     rules: {
         semi: 0,
@@ -22,18 +25,31 @@ module.exports = {
         'no-console': 'warn',
         'no-unused-vars': 'off',
         'no-empty': 'warn',
-        'import/no-named-as-default': 'off',
-        'import/no-anonymous-default-export': 'off',
+        'import/extensions': ['warn', 'ignorePackages', { json: 'always' }],
+        'import/no-named-as-default': 'error',
+        'import/no-commonjs': 'error',
+        'import/no-anonymous-default-export': 'error',
         'import/no-cycle': 'error',
         'import/no-self-import': 'error',
-        'import/no-anonymous-default-export': 'off',
+        'import/no-unresolved': ['error', { ignore: ['.js$'] }],
+        'import/no-internal-modules': [
+            'off',
+            {
+                allow: ['.json$'],
+            },
+        ],
+        //https://dev.to/diballesteros/how-to-quickly-configure-eslint-for-import-sorting-2h73
+        'import/order': [
+            'warn',
+            {
+                groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
+            },
+        ],
         '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
-        '@jambit/typed-redux-saga/use-typed-effects': ['error', 'macro'],
-        '@jambit/typed-redux-saga/delegate-effects': 'error',
     },
     settings: {
         'import/resolver': {
@@ -41,10 +57,11 @@ module.exports = {
                 extensions: ['.js', '.ts'],
             },
         },
+        'import/ignore': ['@reduxjs/toolkit'],
     },
     overrides: [
         {
-            files: ['**/*.ts'],
+            files: ['**/*.ts', '**/*.tsx'],
         },
     ],
 };

@@ -1,4 +1,4 @@
-import { all, spawn } from 'typed-redux-saga/macro';
+import { all, spawn } from 'typed-redux-saga';
 import parentSaga from './parent/sagas';
 
 //https://redux-saga.js.org/docs/advanced/RootSaga.html
