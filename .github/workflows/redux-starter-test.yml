@@ -1,4 +1,4 @@
-name: Web3 Redux Tests
+name: Redux Tests
 
 on:
   push:
