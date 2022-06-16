@@ -48,6 +48,7 @@
     "dependencies": {
         "@reduxjs/toolkit": "^1.6.1",
         "axios": "0.25.0",
+        "indexeddb-orm": "../../../indexeddb-orm",
         "lodash": "^4.17.21",
         "re-reselect": "^4.0.0",
         "redux": "^4.1.1",
@@ -91,6 +92,7 @@
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react-hooks": "^4.3.0",
+        "fake-indexeddb": "^3.1.8",
         "glob": "^8.0.3",
         "husky": "^7.0.2",
         "lint-staged": "^11.1.2",
