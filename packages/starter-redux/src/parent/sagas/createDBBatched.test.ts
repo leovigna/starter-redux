@@ -1,10 +1,9 @@
 import { testSaga, expectSaga } from 'redux-saga-test-plan';
 import { assert } from 'chai';
-import { putCreateDBSAga, createDBSaga, watchCreateDBSaga } from './createDB.js';
+import { putCreateDBBatchedSaga, createDBBatchedSaga, watchCreateDBBatchedSaga } from './createDBBatched.js';
+import { createBatchedAction, createDBBatchedAction } from '../actions/index.js';
 import db from '../../db.js';
 
-import createAction from '../actions/create.js';
-import createDBAction from '../actions/createDB.js';
 import { Interface, validate } from '../model/interface.js';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
@@ -19,17 +18,21 @@ describe('Parent/sagas/createDB.ts', () => {
 
     describe('unit', () => {
         it('putCreate', async () => {
-            const create = createAction(item);
-            testSaga(putCreateDBSAga, create).next().put(createDBAction(item, create.meta.uuid)).next().isDone();
+            const action = createBatchedAction([item]);
+            testSaga(putCreateDBBatchedSaga, action)
+                .next()
+                .put(createDBBatchedAction([item], action.meta.uuid))
+                .next()
+                .isDone();
         });
 
         it('createDB', async () => {
             const models = await db.connect();
-            testSaga(createDBSaga, createDBAction(item))
+            testSaga(createDBBatchedSaga, createDBBatchedAction([item]))
                 .next()
                 .call([db, db.connect])
                 .next(models)
-                .call([models.Parent, models.Parent.create], item)
+                .call([models.Parent, models.Parent.createMultiple], [item])
                 .next()
                 .isDone();
         });
@@ -37,7 +40,7 @@ describe('Parent/sagas/createDB.ts', () => {
 
     describe('integration', () => {
         it('createDB', async () => {
-            await expectSaga(createDBSaga, createDBAction(item)).run();
+            await expectSaga(createDBBatchedSaga, createDBBatchedAction([item])).run();
 
             //DB State
             const models = await db.connect();
@@ -47,7 +50,9 @@ describe('Parent/sagas/createDB.ts', () => {
         });
 
         it('watchCreateDBSaga', async () => {
-            await expectSaga(watchCreateDBSaga).dispatch(createDBAction(item)).run();
+            await expectSaga(watchCreateDBBatchedSaga)
+                .dispatch(createDBBatchedAction([item]))
+                .run();
 
             //DB State
             const models = await db.connect();

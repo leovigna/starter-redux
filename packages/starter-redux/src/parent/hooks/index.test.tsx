@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import { name } from '../common.js';
 import { createStore, StoreType } from '../../store.js';
-import { create } from '../actions/index.js';
+import { createAction } from '../actions/index.js';
 import { useByIdSingle, useByIdMany } from '../hooks/index.js';
 import { Interface, getId } from '../model/interface.js';
 
@@ -23,7 +23,7 @@ describe(`${name}.hooks`, () => {
 
     beforeEach(() => {
         store = createStore();
-        store.dispatch(create(item));
+        store.dispatch(createAction(item));
         wrapper = ({ children }: any) => <Provider store={store}> {children} </Provider>;
     });
 
