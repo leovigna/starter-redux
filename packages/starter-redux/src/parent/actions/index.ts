@@ -11,6 +11,7 @@ import { REMOVE, remove, RemoveAction, isRemoveAction } from './remove.js';
 import { UPDATE, update, UpdateAction, isUpdateAction } from './update.js';
 import { SET, set, SetAction, isSetAction } from './set.js';
 import { FETCH, fetch, FetchAction, isFetchAction } from './fetch.js';
+import { LOAD_DB_ALL, loadDBAllAction, LoadDBAllAction, isLoadDBAllAction } from './loadDBAll.js';
 
 export type ReducerAction = CreateAction | RemoveAction | UpdateAction | SetAction;
 export function isReducerAction(action: { type: string }): action is ReducerAction {
@@ -23,9 +24,14 @@ export function isReducerAction(action: { type: string }): action is ReducerActi
     );
 }
 
-export type SagaAction = FetchAction | CreateDBAction | CreateDBBatchedAction;
+export type SagaAction = FetchAction | CreateDBAction | CreateDBBatchedAction | LoadDBAllAction;
 export function isSagaAction(action: { type: string }): action is SagaAction {
-    return isFetchAction(action) || isCreateDBAction(action) || isCreateDBBatchedAction(action);
+    return (
+        isFetchAction(action) ||
+        isCreateDBAction(action) ||
+        isCreateDBBatchedAction(action) ||
+        isLoadDBAllAction(action)
+    );
 }
 
 export type Action = ReducerAction;
@@ -42,6 +48,7 @@ export type {
     UpdateAction,
     SetAction,
     FetchAction,
+    LoadDBAllAction,
 };
 
 export {
@@ -69,4 +76,7 @@ export {
     FETCH,
     fetch,
     isFetchAction,
+    LOAD_DB_ALL,
+    loadDBAllAction,
+    isLoadDBAllAction,
 };
