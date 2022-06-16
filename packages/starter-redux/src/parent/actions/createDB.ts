@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { name } from '../common.js';
 import { Interface, validate } from '../model/interface.js';
 
-export const CREATE = `${name}/CREATE`;
-export const create = createAction(CREATE, (payload: Interface, uuid?: string) => {
+export const CREATE_DB = `${name}/CREATE`;
+export const createDB = createAction(CREATE_DB, (payload: Interface, uuid?: string) => {
     return {
         payload: validate(payload),
         meta: {
@@ -13,7 +13,7 @@ export const create = createAction(CREATE, (payload: Interface, uuid?: string) =
     };
 });
 
-export type CreateAction = ReturnType<typeof create>;
-export const isCreateAction = create.match;
+export type CreateDBAction = ReturnType<typeof createDB>;
+export const isCreateDBAction = createDB.match;
 
-export default create;
+export default createDB;

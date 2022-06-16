@@ -1,4 +1,5 @@
 import { CREATE, create, CreateAction, isCreateAction } from './create.js';
+import { CREATE_DB, createDB, CreateDBAction, isCreateDBAction } from './createDB.js';
 import { REMOVE, remove, RemoveAction, isRemoveAction } from './remove.js';
 import { UPDATE, update, UpdateAction, isUpdateAction } from './update.js';
 import { SET, set, SetAction, isSetAction } from './set.js';
@@ -9,9 +10,9 @@ export function isReducerAction(action: { type: string }): action is ReducerActi
     return isCreateAction(action) || isRemoveAction(action) || isUpdateAction(action) || isSetAction(action);
 }
 
-export type SagaAction = FetchAction;
+export type SagaAction = FetchAction | CreateDBAction;
 export function isSagaAction(action: { type: string }): action is SagaAction {
-    return isSagaAction(action);
+    return isFetchAction(action) || isCreateDBAction(action);
 }
 
 export type Action = ReducerAction;
@@ -19,12 +20,15 @@ export function isAction(action: { type: string }): action is Action {
     return isReducerAction(action);
 }
 
-export type { CreateAction, RemoveAction, UpdateAction, SetAction, FetchAction };
+export type { CreateAction, CreateDBAction, RemoveAction, UpdateAction, SetAction, FetchAction };
 
 export {
     CREATE,
     create,
     isCreateAction,
+    CREATE_DB,
+    createDB,
+    isCreateDBAction,
     REMOVE,
     remove,
     isRemoveAction,

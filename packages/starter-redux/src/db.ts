@@ -6,6 +6,7 @@ import { settings as ParentSettings } from './parent/model/ormDB.js';
 
 if (!isClient()) {
     require('fake-indexeddb/auto');
+    console.debug('Running in NodeJS Context. Setting up fake-indexeddb');
 }
 
 const settings = {
