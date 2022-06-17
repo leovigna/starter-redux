@@ -33,7 +33,7 @@ jobs:
         with:
           repository: leovigna/indexeddb-orm.git
           path: ./indexeddb-orm
-          ref: develop
+          ref: version/4.0-esbuild
       - run: pnpm i
         working-directory: ./indexeddb-orm
       - run: pnpm run build
@@ -48,4 +48,4 @@ jobs:
       - run: pnpm run build
         working-directory: ./starter-redux
       - run: pnpm run test
-        working-directory: "./starter-redux"
+        working-directory: ./starter-redux
