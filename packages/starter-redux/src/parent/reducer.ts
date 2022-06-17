@@ -1,10 +1,21 @@
 import { name } from './common.js';
-import { ReducerAction, isCreateAction, isRemoveAction, isUpdateAction, isSetAction } from './actions/index.js';
+import {
+    ReducerAction,
+    isCreateAction,
+    isRemoveAction,
+    isUpdateAction,
+    isSetAction,
+    isCreateBatchedAction,
+} from './actions/index.js';
 
 export function reducer(sess: any, action: ReducerAction) {
     const Model = sess[name];
     if (isCreateAction(action)) {
         Model.upsert(action.payload);
+    } else if (isCreateBatchedAction(action)) {
+        action.payload.forEach((item) => {
+            Model.upsert(item);
+        });
     } else if (isRemoveAction(action)) {
         Model.withId(action.payload)?.delete();
     } else if (isUpdateAction(action)) {
