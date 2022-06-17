@@ -49,4 +49,4 @@ jobs:
       - run: pnpm run build
         with:
           path: ./starter-redux
-      #- run: pnpm run test:starter-redux
+      - run: pnpm run test
