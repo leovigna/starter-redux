@@ -44,11 +44,8 @@ jobs:
           path: ./starter-redux
       # Install
       - run: pnpm i
-        with:
-          path: ./starter-redux
+        working-directory: ./starter-redux
       - run: pnpm run build
-        with:
-          path: ./starter-redux
+        working-directory: ./starter-redux
       - run: pnpm run test
-        with:
-          path: "./starter-redux"
+        working-directory: "./starter-redux"
