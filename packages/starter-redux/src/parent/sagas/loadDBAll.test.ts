@@ -6,11 +6,12 @@ import db from '../../db.js';
 import { Interface, validate } from '../model/interface.js';
 import { rootReducer } from '../../reducer.js';
 import { getOrm } from '../../orm.js';
+import { name } from '../common.js';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
 const FDBFactory = require('fake-indexeddb/lib/FDBFactory');
 
-describe('Parent/sagas/loadDBAll.ts', () => {
+describe(`${name}/sagas/loadDBAll.ts`, () => {
     const item: Interface = validate({ firstName: 'John', lastName: 'Doe', age: 42 });
 
     beforeEach(async () => {
@@ -20,14 +21,14 @@ describe('Parent/sagas/loadDBAll.ts', () => {
     describe('unit', () => {
         it('loadDBAll', async () => {
             const models = await db.connect();
-            await models.Parent.create(item);
+            await models[name].create(item);
             const action = loadDBAllAction();
 
             testSaga(loadDBAllSaga, action)
                 .next()
                 .call([db, db.connect])
                 .next(models)
-                .call([models.Parent, models.Parent.all])
+                .call([models[name], models[name].all])
                 .next([item])
                 .put(createBatchedAction([item], action.meta.uuid))
                 .next()
@@ -38,7 +39,7 @@ describe('Parent/sagas/loadDBAll.ts', () => {
     describe('integration', () => {
         it('loadDBAll', async () => {
             const models = await db.connect();
-            await models.Parent.create(item);
+            await models[name].create(item);
             const action = loadDBAllAction();
 
             const initialState = getOrm().getEmptyState();

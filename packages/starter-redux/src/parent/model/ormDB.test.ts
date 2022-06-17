@@ -3,7 +3,7 @@ import { name } from '../common.js';
 import { Interface, validate } from '../model/interface.js';
 import db from '../../db.js';
 
-describe(`${name}.model`, () => {
+describe(`${name}/model/ormDB.ts`, () => {
     const item: Interface = validate({ firstName: 'John', lastName: 'Doe', age: 42 });
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
@@ -15,7 +15,7 @@ describe(`${name}.model`, () => {
 
     it('insert', async () => {
         const models = await db.connect();
-        const record = await models.Parent.create(item);
+        const record = await models[name].create(item);
         assert.deepEqual(record, item);
     });
 });

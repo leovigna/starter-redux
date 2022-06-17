@@ -16,12 +16,5 @@ export function getOrm(): any {
 
 export const initializeState = (orm: any) => {
     const state = orm.getEmptyState();
-
-    // Default state
-    /*
-    const { Parent } = orm.mutableSession(state);
-    Parent.create({ firstName: 'John', lastName: 'Doe' });
-    */
-
     return state;
 };
