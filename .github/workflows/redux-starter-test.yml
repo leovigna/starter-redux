@@ -50,3 +50,5 @@ jobs:
         with:
           path: ./starter-redux
       - run: pnpm run test
+        with:
+          path: "./starter-redux"
