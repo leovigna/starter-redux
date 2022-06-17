@@ -7,13 +7,13 @@ import {
     CreateDBBatchedAction,
     isCreateDBBatchedAction,
 } from './createDBBatched.js';
+import { LOAD_DB_ALL, loadDBAllAction, LoadDBAllAction, isLoadDBAllAction } from './loadDBAll.js';
 import { REMOVE, remove, RemoveAction, isRemoveAction } from './remove.js';
 import { UPDATE, update, UpdateAction, isUpdateAction } from './update.js';
 import { SET, set, SetAction, isSetAction } from './set.js';
 import { FETCH, fetch, FetchAction, isFetchAction } from './fetch.js';
-import { LOAD_DB_ALL, loadDBAllAction, LoadDBAllAction, isLoadDBAllAction } from './loadDBAll.js';
 
-export type ReducerAction = CreateAction | RemoveAction | UpdateAction | SetAction;
+export type ReducerAction = CreateAction | CreateBatchedAction | RemoveAction | UpdateAction | SetAction;
 export function isReducerAction(action: { type: string }): action is ReducerAction {
     return (
         isCreateAction(action) ||

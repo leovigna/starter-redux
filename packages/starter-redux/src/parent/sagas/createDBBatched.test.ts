@@ -3,13 +3,14 @@ import { assert } from 'chai';
 import { putCreateDBBatchedSaga, createDBBatchedSaga, watchCreateDBBatchedSaga } from './createDBBatched.js';
 import { createBatchedAction, createDBBatchedAction } from '../actions/index.js';
 import db from '../../db.js';
+import { name } from '../common.js';
 
 import { Interface, validate } from '../model/interface.js';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
 const FDBFactory = require('fake-indexeddb/lib/FDBFactory');
 
-describe('Parent/sagas/createDB.ts', () => {
+describe(`${name}/sagas/createDB.ts`, () => {
     const item: Interface = validate({ firstName: 'John', lastName: 'Doe', age: 42 });
 
     beforeEach(async () => {
@@ -32,7 +33,7 @@ describe('Parent/sagas/createDB.ts', () => {
                 .next()
                 .call([db, db.connect])
                 .next(models)
-                .call([models.Parent, models.Parent.createMultiple], [item])
+                .call([models[name], models[name].createMultiple], [item])
                 .next()
                 .isDone();
         });
@@ -44,7 +45,7 @@ describe('Parent/sagas/createDB.ts', () => {
 
             //DB State
             const models = await db.connect();
-            const record = await models.Parent.find(item.id);
+            const record = await models[name].find(item.id);
             assert.isDefined(record);
             assert.deepEqual(record, item);
         });
@@ -56,7 +57,7 @@ describe('Parent/sagas/createDB.ts', () => {
 
             //DB State
             const models = await db.connect();
-            const record = await models.Parent.find(item.id);
+            const record = await models[name].find(item.id);
             assert.isDefined(record);
             assert.deepEqual(record, item);
         });
