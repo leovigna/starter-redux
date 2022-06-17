@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import createAction from './create.js';
+import createAction, { CREATE, CreateAction, isCreateAction } from './create.js';
 import { Interface, validate } from '../model/interface.js';
 import { getOrm } from '../../orm.js';
 import { rootReducer } from '../../reducer.js';
@@ -8,6 +8,18 @@ describe('Parent/actions/create.ts', () => {
     const item: Interface = validate({ firstName: 'John', lastName: 'Doe', age: 42 });
 
     describe('unit', () => {
+        it('create', () => {
+            const expected: CreateAction = {
+                type: CREATE,
+                payload: { ...item },
+                meta: {
+                    uuid: '',
+                },
+            };
+            assert.isTrue(isCreateAction(expected));
+            assert.deepEqual(createAction(item, ''), expected);
+        });
+
         it('create', async () => {
             const initialState = getOrm().getEmptyState();
             const action = createAction(item);

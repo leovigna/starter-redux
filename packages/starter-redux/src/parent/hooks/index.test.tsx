@@ -9,6 +9,8 @@ import { Interface, getId } from '../model/interface.js';
 
 //eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
 const jsdom = require('mocha-jsdom');
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
+const FDBFactory = require('fake-indexeddb/lib/FDBFactory');
 
 describe(`${name}.hooks`, () => {
     jsdom({ url: 'http://localhost' });
@@ -22,6 +24,8 @@ describe(`${name}.hooks`, () => {
     let wrapper: any;
 
     beforeEach(() => {
+        indexedDB = new FDBFactory();
+
         store = createStore();
         store.dispatch(createAction(item));
         wrapper = ({ children }: any) => <Provider store={store}> {children} </Provider>;

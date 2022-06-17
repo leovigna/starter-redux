@@ -3,12 +3,12 @@ import { expectSaga } from 'redux-saga-test-plan';
 import takeEveryBuffered from './takeEveryBuffered.js';
 import { sleep } from '../utils/index.js';
 
-const time = Date.now();
+//const time = Date.now();
 function* sleepSaga(action: any) {
     yield* call(sleep, action.payload);
 
     const completed = Date.now();
-    console.debug(`${completed - time} - ${JSON.stringify(action)}`);
+    //console.debug(`${completed - time} - ${JSON.stringify(action)}`);
     yield put({ type: 'COMPLETE', payload: completed });
 }
 

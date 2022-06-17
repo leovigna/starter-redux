@@ -5,6 +5,9 @@ import { selectByIdSingle } from './selectors/index.js';
 import { name } from './common.js';
 import { createStore, StoreType } from '../store.js';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
+const FDBFactory = require('fake-indexeddb/lib/FDBFactory');
+
 describe(`${name}.integration`, () => {
     const item = {
         firstName: 'John',
@@ -17,6 +20,7 @@ describe(`${name}.integration`, () => {
     let store: StoreType;
 
     beforeEach(() => {
+        indexedDB = new FDBFactory();
         store = createStore();
     });
 

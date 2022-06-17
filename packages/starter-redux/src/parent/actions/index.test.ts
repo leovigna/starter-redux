@@ -1,6 +1,4 @@
 import { assert } from 'chai';
-
-import { createAction, CREATE, CreateAction, isCreateAction } from './create.js';
 import { update, UPDATE, UpdateAction, isUpdateAction } from './update.js';
 import { remove, REMOVE, RemoveAction, isRemoveAction } from './remove.js';
 import { set, SET, SetAction, isSetAction } from './set.js';
@@ -10,18 +8,6 @@ import { name } from '../common.js';
 describe(`${name}.actions`, () => {
     const item: Interface = { firstName: 'John', lastName: 'Doe', age: 42 };
     const id = getId(item);
-
-    it('create', () => {
-        const expected: CreateAction = {
-            type: CREATE,
-            payload: { id, ...item },
-            meta: {
-                uuid: '',
-            },
-        };
-        assert.isTrue(isCreateAction(expected));
-        assert.deepEqual(createAction(item), expected);
-    });
 
     it('update', () => {
         const expected: UpdateAction = {
