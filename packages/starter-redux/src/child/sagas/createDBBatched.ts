@@ -12,8 +12,8 @@ import { name } from '../common.js';
 /** Handle async db action */
 export function* createDBBatchedSaga(action: CreateDBBatchedAction) {
     const { payload } = action;
-    const db = yield* call(getDB);
 
+    const db = yield* call(getDB);
     const models = yield* call([db, db.connect]);
     yield* call([models[name], models[name].createMultiple], payload);
 }

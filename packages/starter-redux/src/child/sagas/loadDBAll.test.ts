@@ -59,7 +59,7 @@ describe(`${name}/sagas/loadDBAll.ts`, () => {
                     indexes: {},
                     meta: { maxId: NaN },
                 },
-                Child: { items: [], itemsById: {}, indexes: {}, meta: {} },
+                Parent: { items: [], itemsById: {}, indexes: {}, meta: {} },
             };
 
             await expectSaga(loadDBAllSaga, action)

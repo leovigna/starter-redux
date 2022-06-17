@@ -24,7 +24,7 @@ describe(`${name}/actions/createBatched.ts`, () => {
                     indexes: {},
                     meta: { maxId: NaN },
                 },
-                Child: { items: [], itemsById: {}, indexes: {}, meta: {} },
+                Parent: { items: [], itemsById: {}, indexes: {}, meta: {} },
             };
 
             const state = rootReducer(initialState, action);

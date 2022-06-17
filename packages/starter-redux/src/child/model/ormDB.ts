@@ -2,17 +2,17 @@
 import { Model } from 'indexeddb-orm';
 import { name } from '../common.js';
 
-export class ParentDBModel extends Model {
+export class ChildDBModel extends Model {
     static TableName = name;
 }
 
 export const settings = {
-    name, //name of table
-    primary: 'id', //auto increment field (default id)
-    ormClass: ParentDBModel,
+    name,
+    primary: 'id',
+    ormClass: ChildDBModel,
     columns: [
         {
-            name: 'firstName', //other indexes in the database
+            name: 'firstName',
             index: 'firstName',
         },
         {
@@ -26,4 +26,4 @@ export const settings = {
     ],
 };
 
-export default ParentDBModel;
+export default ChildDBModel;

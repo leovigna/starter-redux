@@ -3,18 +3,25 @@ import { Connector } from 'indexeddb-orm';
 import { REDUX_ROOT } from './common.js';
 import isClient from './utils/isClient.js';
 import { settings as ParentSettings } from './parent/model/ormDB.js';
-
-if (!isClient()) {
-    require('fake-indexeddb/auto');
-    console.debug('Running in NodeJS Context. Setting up fake-indexeddb');
-}
+import { settings as ChildSettings } from './child/model/ormDB.js';
 
 const settings = {
     name: REDUX_ROOT,
-    version: 1, //version of database
-    tables: [ParentSettings],
+    version: 1,
+    tables: [ParentSettings, ChildSettings],
 };
 
-export const db = new Connector(settings);
+let db: Connector;
+export async function getDB() {
+    if (db) return db;
 
-export default db;
+    if (!isClient()) {
+        require('fake-indexeddb/auto');
+        console.debug('Running in NodeJS Context. Setting up fake-indexeddb');
+    }
+
+    db = new Connector(settings);
+    return db;
+}
+
+export default getDB;
