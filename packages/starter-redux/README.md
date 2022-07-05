@@ -38,6 +38,14 @@ https://web.dev/indexeddb-best-practices/
 
 API Wrapper around IndexedDB.
 https://github.com/dexie/Dexie.js
+https://dexie.org/docs/Tutorial/React
 https://dexie.org/docs/Version/Version.stores()
 https://dexie.org/docs/Table/Table.bulkPut()
 https://dexie.org/docs/dexie-react-hooks/useLiveQuery()
+https://github.com/dumbmatter/fakeIndexedDB#with-dexie-and-other-indexeddb-api-wrappers
+
+https://github.com/dexie/Dexie.js/issues/359
+
+## DevTools
+
+https://chrome.google.com/webstore/detail/indexeddbedit/npjecebdjnmlolggnoajngnlodhgpfac

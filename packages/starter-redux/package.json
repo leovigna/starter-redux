@@ -50,6 +50,7 @@
         "axios": "0.25.0",
         "dexie": "^3.2.2",
         "indexeddb-orm": "../../../indexeddb-orm",
+        "indexeddbshim": "^10.0.0",
         "lodash": "^4.17.21",
         "re-reselect": "^4.0.0",
         "redux": "^4.1.1",
