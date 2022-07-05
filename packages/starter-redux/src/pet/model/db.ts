@@ -20,9 +20,18 @@ let db: StarterReduxDexie;
 interface GetDBOptions {
     fake: boolean;
 }
+
+export function setDB(newDb: StarterReduxDexie) {
+    db = newDb;
+}
+
 export function getDB(options?: GetDBOptions) {
     if (db) return db;
+    db = createDB(options);
+    return db;
+}
 
+export function createDB(options?: GetDBOptions) {
     if (!isClient() || options?.fake) {
         console.debug('Creating Dexie with fake-indexeddb');
         const shim: any = {};
@@ -35,6 +44,5 @@ export function getDB(options?: GetDBOptions) {
     } else {
         console.debug('Creating Dexie with real indexeddb');
     }
-    db = new StarterReduxDexie();
-    return db;
+    return new StarterReduxDexie();
 }

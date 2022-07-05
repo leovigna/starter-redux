@@ -1,6 +1,5 @@
 import { assert } from 'chai';
 import { renderHook } from '@testing-library/react-hooks';
-import { rmSync, existsSync } from 'fs';
 import { useByIdSingle } from '../index.js';
 import { Pet } from '../model/interface.js';
 import { getDB, StarterReduxDexie } from '../model/db.js';
@@ -14,10 +13,7 @@ describe('pet/hooks/useByIdSingle.test.tsx', () => {
     const item: Pet = { id: 1, name: 'Flocon', age: 10, type: 'dog' };
     let db: StarterReduxDexie;
 
-    const sqliteDB = ['__sysdb__.sqlite', 'D_^Starter^Redux.sqlite'];
-
     before(async () => {
-        sqliteDB.forEach((p) => existsSync(p) && rmSync(p));
         db = getDB({ fake: true });
     });
 
@@ -33,9 +29,5 @@ describe('pet/hooks/useByIdSingle.test.tsx', () => {
 
     afterEach(async () => {
         await db.pets.clear();
-    });
-
-    after(() => {
-        sqliteDB.forEach((p) => existsSync(p) && rmSync(p));
     });
 });
