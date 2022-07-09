@@ -1,9 +1,10 @@
 /**
- * Pets
- * @module Pet
+ * Store errors from redux actions
+ * @module Error
  */
 
 export * from './model/index.js';
+export * from './actions/index.js';
 
 import CRUDModel from './crud.js';
 

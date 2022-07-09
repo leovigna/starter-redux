@@ -1,5 +1,7 @@
-export interface Pet {
-    id?: number;
+export interface PetId {
+    id: string;
+}
+export interface Pet extends PetId {
     name: string;
     age: number;
     type: 'dog' | 'cat';

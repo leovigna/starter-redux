@@ -1,6 +1,5 @@
 import { ORM } from 'redux-orm';
-import ParentModel from './parent/model/orm.js';
-import ChildModel from './child/model/orm.js';
+import PetModel from './pet/model/orm.js';
 import { REDUX_ROOT } from './common.js';
 
 //Fix undefined import issue
@@ -10,8 +9,7 @@ export function getOrm(): any {
     orm = new ORM({
         stateSelector: (state: any) => state[REDUX_ROOT],
     });
-    orm.register(ParentModel);
-    orm.register(ChildModel);
+    orm.register(PetModel);
 
     return orm;
 }

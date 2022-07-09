@@ -1,21 +1,24 @@
-import { enableBatching } from 'redux-batched-actions';
-import { Reducer } from 'redux';
-import { Action as ParentAction, isReducerAction as isParentAction } from './parent/actions/index.js';
-import { Action as ChildAction, isReducerAction as isChildAction } from './child/actions/index.js';
-import parentReducer from './parent/reducer.js';
-import childReducer from './child/reducer.js';
+import { Action, Reducer, combineReducers } from 'redux';
+import { REDUX_ROOT } from './common.js';
+
 import { getOrm, initializeState } from './orm.js';
 
-export type Action = ParentAction | ChildAction;
+import PetCRUD from './pet/crud.js';
 
-export function reducerWithOrm(state: any, action: Action) {
+export const reducerWithOrm: Reducer = (state: any, action: Action) => {
     const orm = getOrm();
     const sess = orm.session(state || initializeState(orm));
-    if (isParentAction(action)) parentReducer(sess, action);
-    if (isChildAction(action)) childReducer(sess, action);
+
+    if (PetCRUD.isAction(action)) PetCRUD.reducer(sess, action);
 
     return sess.state;
-}
+};
 
-export const reducerWithBatching = enableBatching(reducerWithOrm as Reducer);
-export const rootReducer = reducerWithBatching;
+export const createRootReducer = (reducerWeb3Redux: Reducer) => {
+    return combineReducers({
+        [REDUX_ROOT]: reducerWeb3Redux,
+    });
+};
+
+export const rootReducer = createRootReducer(reducerWithOrm);
+export default rootReducer;
