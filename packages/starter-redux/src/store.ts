@@ -1,16 +1,11 @@
-import { combineReducers, createStore as createReduxStore, applyMiddleware } from 'redux';
+import { createStore as createReduxStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { REDUX_ROOT } from './common.js';
 import { rootReducer } from './reducer.js';
 import { rootSaga } from './saga.js';
 
-const reducers = combineReducers({
-    [REDUX_ROOT]: rootReducer,
-});
-
 export const createStore = () => {
     const sagaMiddleware = createSagaMiddleware();
-    const store = createReduxStore(reducers, applyMiddleware(sagaMiddleware));
+    const store = createReduxStore(rootReducer, applyMiddleware(sagaMiddleware));
     sagaMiddleware.run(rootSaga);
     return store;
 };
