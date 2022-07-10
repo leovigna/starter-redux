@@ -286,6 +286,12 @@ export function createCRUDModel<
         return table.bulkDelete(ids);
     };
 
+    const clear = async () => {
+        const db = getDB();
+        const table = db.table<T_Encoded>(name);
+        return table.clear();
+    };
+
     const db = {
         get,
         bulkGet,
@@ -299,6 +305,7 @@ export function createCRUDModel<
         bulkUpdate,
         delete: deleteDB,
         bulkDelete,
+        clear,
     };
 
     /** Dexie Sagas */
