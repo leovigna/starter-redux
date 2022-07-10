@@ -1,27 +1,49 @@
-// eslint-disable-next-line import/no-unresolved
-import { Connector } from 'indexeddb-orm';
+// db.ts
+import Dexie, { Table } from 'dexie';
+//@ts-ignore
 import { REDUX_ROOT } from './common.js';
+import { Pet, PetIndex } from './pet/model/index.js';
+
 import isClient from './utils/isClient.js';
-import { settings as ParentSettings } from './parent/model/ormDB.js';
-import { settings as ChildSettings } from './child/model/ormDB.js';
 
-const settings = {
-    name: REDUX_ROOT,
-    version: 1,
-    tables: [ParentSettings, ChildSettings],
-};
+export class Web3ReduxDexie extends Dexie {
+    Pet!: Table<Pet>;
 
-let db: Connector;
-export async function getDB() {
-    if (db) return db;
-
-    if (!isClient()) {
-        require('fake-indexeddb/auto');
-        console.debug('Running in NodeJS Context. Setting up fake-indexeddb');
+    constructor() {
+        super(REDUX_ROOT);
+        this.version(1).stores({
+            Pet: PetIndex,
+        });
     }
 
-    db = new Connector(settings);
+    async clear() {
+        const promises = [this.Pet.clear()];
+        return Promise.all(promises);
+    }
+}
+
+let db: Web3ReduxDexie;
+interface GetDBOptions {
+    fake: boolean;
+}
+
+export function setDB(newDb: Web3ReduxDexie) {
+    db = newDb;
+}
+
+export function getDB(options?: GetDBOptions) {
+    if (db) return db;
+    db = createDB(options);
     return db;
+}
+
+export function createDB(options?: GetDBOptions) {
+    if (!isClient() || options?.fake) {
+        console.debug('Creating Dexie with fake-indexeddb');
+    } else {
+        console.debug('Creating Dexie with real indexeddb');
+    }
+    return new Web3ReduxDexie();
 }
 
 export default getDB;

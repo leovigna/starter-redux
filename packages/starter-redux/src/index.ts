@@ -1,4 +1,4 @@
-export * as Parent from './parent/index.js';
+export * as Pet from './pet/index.js';
 export { getOrm } from './orm.js';
 export { rootReducer } from './reducer.js';
 export { rootSaga } from './saga.js';
