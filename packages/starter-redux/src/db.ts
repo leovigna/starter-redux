@@ -1,7 +1,6 @@
 // db.ts
 import Dexie, { Table } from 'dexie';
 //@ts-ignore
-import setGlobalVars from 'indexeddbshim';
 import { REDUX_ROOT } from './common.js';
 import { Pet, PetIndex } from './pet/model/index.js';
 
@@ -15,6 +14,11 @@ export class Web3ReduxDexie extends Dexie {
         this.version(1).stores({
             Pet: PetIndex,
         });
+    }
+
+    async clear() {
+        const promises = [this.Pet.clear()];
+        return Promise.all(promises);
     }
 }
 
@@ -36,13 +40,6 @@ export function getDB(options?: GetDBOptions) {
 export function createDB(options?: GetDBOptions) {
     if (!isClient() || options?.fake) {
         console.debug('Creating Dexie with fake-indexeddb');
-        const shim: any = {};
-        //@ts-ignore
-        //global.window = global; // We'll allow ourselves to use `window.indexedDB` or `indexedDB` as a global
-        setGlobalVars(shim, { checkOrigin: false }); // See signature below
-        const { indexedDB, IDBKeyRange } = shim;
-        Dexie.dependencies.indexedDB = indexedDB;
-        Dexie.dependencies.IDBKeyRange = IDBKeyRange;
     } else {
         console.debug('Creating Dexie with real indexeddb');
     }
